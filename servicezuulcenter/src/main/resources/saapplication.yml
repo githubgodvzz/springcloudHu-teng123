@@ -1,0 +1,26 @@
+spring:
+  cloud:        
+     stream:
+      kafka:
+         binder:
+          brokers: 130.251.233.222:9092 #消息代理地址 
+           
+zuul:
+  AccessFilter: 
+    pre:
+      disable: true #禁用AccessFilter过滤器
+  filter: #动态过滤器加载配置
+    root: D:\work\cs\git #文件存放位置
+    interval: 10 #刷新时间 单位秒
+  #ignored-services: '*'
+  routes:
+    c3: #优先级高于serviceId的值
+      path: /c3/**
+      serviceId: c3
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #"*"  #Spring Boot 2.0 的Actuator只暴露health和info,加入此向可以暴露refresh    
+                

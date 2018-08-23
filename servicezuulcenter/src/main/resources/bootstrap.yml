@@ -1,0 +1,32 @@
+server:
+  port: 58201
+spring:
+  application:
+    name: zuulservice #应用名称
+  cloud:
+    config:
+      #uri:  http://130.251.233.221:58301/ #配置中心地址
+      discovery:
+        service-id: serviceconfigcenter
+        enabled: true
+      label: master   #git master分支，默认为master
+      profile: dev  #开发模式，支持多个模式配置文件，通过profile分开
+      name: commonZuul,commonFeignClient #配置文件名称,多个文件用逗号分开，如果不指定name，配置文件名为 spring.application.name
+      fail-fast: true #失败快速响应
+      retry: #失败重试
+        max-attempts: 10 #重试次数,默认6次
+        multiplier: 1000 #初始重复间隔时间（单位毫秒），默认为1000毫秒
+        initial-interval: 1100 #下一间隔的乘数，默认为1。1,所以当最初间隔是1000毫秒，下一次失败后的间隔为1100秒
+        max-interval: 2000 #最大间隔时间    
+  #profiles:
+   # active:
+eureka:
+  client:
+    service-url:
+      defaultZone: http://130.251.233.221:58001/eureka/,http://130.251.233.221:58002/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+   

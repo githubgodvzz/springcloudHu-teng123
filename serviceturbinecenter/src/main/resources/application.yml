@@ -1,0 +1,15 @@
+
+ 
+  
+management:
+   endpoints:
+    web:
+      exposure:
+        include: "*"  #"*"  #Spring Boot 2.0 的Actuator只暴露health和info,加入此向可以暴露refresh    
+turbine:
+  app-config: k3,k5  #需要收集监控信息的服务名
+  combine-host-port: true
+  cluster-name-expression: new String("default")
+
+ 
+ 

@@ -1,0 +1,22 @@
+
+server:
+  port: 58006
+spring:
+  application:
+    name: serviceturbinecenter #应用名称
+ 
+  #profiles:
+   # active:
+
+eureka:
+  client:
+    enabled: true #启用eureka客户端
+   
+    registry-fetch-interval-seconds: 30 # 获取注册信息的时间间隔，单位为秒，默认30秒
+    initial-instance-info-replication-interval-seconds: 40
+    service-url:
+      defaultZone: http://localhost:58001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+   

@@ -1,0 +1,48 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #instance-id: ${spring.cloud.client.ip_address}:${server.port}
+    #ip-address: 
+    # lease-expiration-duration-in-seconds: ${lease-expiration-duration-in-seconds} #租约寿命
+    #lease-renewal-interval-in-seconds: ${lease-renewal-interval-in-seconds}#续约间隔
+    
+  client:    
+    serviceUrl:
+       defaultZone: http://130.251.233.221:58001/eureka/ 
+server:
+  port: 58301
+spring:
+  application:
+    name: serviceconfigcenter
+  cloud:
+    config:
+      server:
+        git:
+          uri:  git@130.251.233.222:/home/git/configcenter.git #git远程库地址
+          force-pull: true   #强制更新
+          username: git     #git用户
+          password: git     #git密码     
+          default-label: master #默认获取的分支
+          strict-host-key-checking: false  #ssh登录时是否询问,默认为true，见议设置为false,不然会报错不能clonegit服务
+          search-paths: /**  #查找 库的位置，榀以指定库中的文件夹
+        
+                     
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #Spring Boot 2.0 的Actuator只暴露health和info,加入此向可以暴露refresh              
+         
+          
+          
+        
+          
+          
+          
+          
+         
+       
+   
+
+  
